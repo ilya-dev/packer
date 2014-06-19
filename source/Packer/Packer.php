@@ -18,7 +18,10 @@ class Packer {
      */
     public function run()
     {
-        return (new Application('Packer', Packer::VERSION))->run();
+        $application = new Application('Packer', Packer::VERSION);
+        $application->add(new Commands\PackCommand);
+
+        return $application->run();
     }
 
 }
