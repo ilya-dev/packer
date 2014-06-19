@@ -1,0 +1,21 @@
+{
+    "main": "binaries/packer",
+    "output": "packer.phar",
+    "stub": true, 
+    "files": [
+        "readme"
+    ],
+    "finder": [
+        {
+            "name": "*.php",
+            "in": "source"
+        },
+        {
+            "name": "*.php",
+            "in": "vendor",
+            "exclude": [
+                "bin", "phpunit", "sebastian"
+            ]
+        }
+    ]
+}

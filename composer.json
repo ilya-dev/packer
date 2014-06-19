@@ -2,6 +2,9 @@
     "name": "ilya/packer",
     "description": "User-friendly Box wrapper.",
     "license": "MIT",
+    "bin": [
+        "binaries/packer"
+    ],
     "require": {
         "symfony/console": "2.5.*",
         "symfony/finder": "2.5.*"
