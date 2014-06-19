@@ -12,6 +12,9 @@
     "autoload": {
         "psr-4": {
             "Packer\\": "source/Packer"
-        }
+        },
+        "classmap": [
+            "tests/TestCase.php"
+        ]
     }
 }

@@ -1,6 +1,6 @@
 <?php namespace Packer;
 
-class PackerTest extends \PHPUnit_Framework_TestCase {
+class PackerTest extends \TestCase {
 
     protected $packer;
 
