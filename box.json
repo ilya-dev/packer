@@ -3,7 +3,7 @@
     "output": "packer.phar",
     "stub": true, 
     "files": [
-        "readme"
+        "readme.md"
     ],
     "finder": [
         {
