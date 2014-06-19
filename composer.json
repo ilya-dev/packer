@@ -1,4 +1,7 @@
 {
+    "name": "ilya/packer",
+    "description": "User-friendly Box wrapper.",
+    "license": "MIT",
     "require": {
         "symfony/console": "2.5.*",
         "symfony/finder": "2.5.*"
@@ -7,6 +10,8 @@
         "phpunit/phpunit": "4.1.*"
     },
     "autoload": {
-        "Packer\\": "source/Packer"
+        "psr-4": {
+            "Packer\\": "source/Packer"
+        }
     }
 }
