@@ -88,6 +88,15 @@ class PackCommand extends Command {
         }
 
         $dialog = $this->getDialog();
+        $path = null;
+
+        do
+        {
+            $path = $dialog->ask($this->output, '<question>Where is the binary file, yo?</question> ', null);
+        }
+        while (is_null($path));
+
+        return $path;
     }
 
     /**
