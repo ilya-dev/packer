@@ -7,4 +7,13 @@ class PackerTest extends \TestCase {
         $this->assertInstanceOf('Packer\Packer', $this->subject);
     }
 
+    /** @test */ function it_creates_a_new_application_instance()
+    {
+        $application = $this->subject->run();
+
+        $this->assertInstanceOf('Symfony\Component\Console\Application', $application);
+        $this->assertEquals('Packer', $application->getName());
+        $this->assertNotEquals('UNKNOWN', $application->getVersion());
+    }
+
 }
