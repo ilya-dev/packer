@@ -62,8 +62,7 @@ class PackCommand extends Command {
     {
         if ( ! $name = $this->input->getOption('destination'))
         {
-            /** @var Symfony\Component\Console\Helper\DialogHelper $dialog */
-            $dialog = $this->getHelperSet()->get('dialog');
+            $dialog = $this->getDialog();
             $name = null;
 
             do
@@ -87,6 +86,18 @@ class PackCommand extends Command {
         {
             return $path;
         }
+
+        $dialog = $this->getDialog();
+    }
+
+    /**
+     * Get the Dialog helper instance.
+     *
+     * @return Symfony\Component\Console\Helper\DialogHelper
+     */
+    protected function getDialog()
+    {
+        return $this->getHelperSet()->get('dialog');
     }
 
 }
