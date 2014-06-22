@@ -62,7 +62,7 @@ class PackCommand extends Command {
         }
         while (is_null($name));
 
-        return $name;
+        return $name; //str_replace('.phar', '', $name);
     }
 
 }

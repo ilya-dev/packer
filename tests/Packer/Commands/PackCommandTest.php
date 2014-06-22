@@ -7,8 +7,9 @@ class PackCommandTest extends \TestCase
     /** @test */ function it_receives_the_archive_name()
     {
         $tester = new CommandTester($command = new PackCommand);
-        $tester->execute(['--destination' => 'packer']);
+        $tester->execute(['--destination' => 'packer.phar']);
 
         $this->assertContains('The archive name you entered is packer.', $tester->getDisplay());
+        $this->assertNotContains('.phar', $tester->getDisplay());
     }
 }
