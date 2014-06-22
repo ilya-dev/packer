@@ -14,14 +14,15 @@ class Packer {
     /**
      * Run Packer.
      *
-     * @return integer
+     * @param boolean $testing
+     * @return integer|Application
      */
-    public function run()
+    public function run($testing = false)
     {
         $application = new Application('Packer', Packer::VERSION);
         $application->add(new Commands\PackCommand);
 
-        return $application->run();
+        return $testing ? $application : $application->run();
     }
 
 }
