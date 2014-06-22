@@ -31,6 +31,7 @@ class PackCommand extends Command {
         $this->setName('pack');
         $this->setDescription('Starts the builder');
         $this->addOption('destination', 'd', InputOption::VALUE_REQUIRED, 'The desired archive name.', null);
+        $this->addOption('source', 's', InputOption::VALUE_REQUIRED, 'Path to the binary file.', null);
     }
 
     /**
