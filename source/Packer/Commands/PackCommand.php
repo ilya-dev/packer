@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class PackCommand extends Command {
@@ -22,6 +23,7 @@ class PackCommand extends Command {
     {
         $this->setName('pack');
         $this->setDescription('Starts the builder');
+        $this->addOption('destination', 'd', InputOption::VALUE_REQUIRED, 'The desired archive name.', null);
     }
 
     /**
@@ -34,7 +36,11 @@ class PackCommand extends Command {
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
-        $archiveName = $this->askForArchiveName();
+
+        if ( ! $archiveName = $input->getOption('destination'))
+        {
+            $archiveName = $this->askForArchiveName();
+        }
 
         $output->writeln(sprintf('<info>The archive name you entered is %s.</info>', $archiveName));
     }
