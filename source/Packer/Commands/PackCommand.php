@@ -47,8 +47,10 @@ class PackCommand extends Command {
         $this->output = $output;
 
         $archiveName = $this->askForArchiveName();
+        $binaryFile = $this->guessBinaryPath();
 
         $output->writeln(sprintf('<info>The archive name you entered is %s.</info>', $archiveName));
+        $output->writeln(sprintf('<info>The binary file you specified is %s.</info>', $binaryFile));
     }
 
     /**
@@ -81,7 +83,10 @@ class PackCommand extends Command {
      */
     protected function guessBinaryPath()
     {
-
+        if ($path = $this->input->getOption('source'))
+        {
+            return $path;
+        }
     }
 
 }
