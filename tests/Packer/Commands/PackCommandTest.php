@@ -12,4 +12,9 @@ class PackCommandTest extends \TestCase
         $this->assertContains('The archive name you entered is packer.', $tester->getDisplay());
         $this->assertNotContains('.phar', $tester->getDisplay());
     }
+
+    /** @test */ function it_guesses_the_path_to_the_binary()
+    {
+
+    }
 }

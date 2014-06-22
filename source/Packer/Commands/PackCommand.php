@@ -73,4 +73,14 @@ class PackCommand extends Command {
         return str_ireplace('.phar', '', $name);
     }
 
+    /**
+     * Attempt to guess the path to the binary file.
+     *
+     * @return string
+     */
+    protected function guessBinaryPath()
+    {
+
+    }
+
 }
