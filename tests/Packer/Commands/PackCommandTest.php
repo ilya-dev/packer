@@ -35,4 +35,9 @@ class PackCommandTest extends \TestCase
     {
         $this->assertContains('Files license, readme.md have been added to the archive.', $this->tester->getDisplay());
     }
+
+    /** @test */ function it_adds_source_and_vendor_directories()
+    {
+        $this->assertContains('Directories source, vendor have been added to the archive.', $this->tester->getDisplay());
+    }
 }
