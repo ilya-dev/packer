@@ -7,8 +7,7 @@ class PackCommandTest extends \TestCase
     protected $tester;
 
     protected $arguments = [
-        '--destination' => 'packer.phar',
-        '--source' => 'bin/packer'
+        '--destination' => 'packer.phar'
     ];
 
     protected function setUp()
@@ -29,6 +28,6 @@ class PackCommandTest extends \TestCase
 
     /** @test */ function it_guesses_the_path_to_the_binary()
     {
-        $this->assertContains('The binary file you specified is bin/packer.', $this->tester->getDisplay());
+        $this->assertContains('The binary file you specified is binaries/packer.', $this->tester->getDisplay());
     }
 }
