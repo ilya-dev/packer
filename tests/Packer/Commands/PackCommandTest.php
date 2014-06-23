@@ -30,4 +30,9 @@ class PackCommandTest extends \TestCase
     {
         $this->assertContains('The binary file you specified is binaries/packer.', $this->tester->getDisplay());
     }
+
+    /** @test */ function it_adds_important_files_to_the_archive()
+    {
+        $this->assertContains('Files license, readme.md have been added to the archive.', $this->tester->getDisplay());
+    }
 }
