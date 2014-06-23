@@ -35,6 +35,7 @@ class PackCommand extends Command {
         $this->addOption('destination', 'd', InputOption::VALUE_REQUIRED, 'The desired archive name.', null);
         $this->addOption('source', 's', InputOption::VALUE_REQUIRED, 'Path to the binary file.', null);
         $this->addOption('files', 'f', InputOption::VALUE_REQUIRED, 'Files you would like to include.', null);
+        $this->addOption('directories', null, InputOption::VALUE_REQUIRED, 'Directories you would like to include.', null);
     }
 
     /**
@@ -52,10 +53,12 @@ class PackCommand extends Command {
         $archiveName = $this->askForArchiveName();
         $binaryFile = $this->guessBinaryPath($archiveName);
         $files = $this->addFiles();
+        $directories = $this->addDirectories();
 
         $output->writeln(sprintf('<info>The archive name you entered is %s.</info>', $archiveName));
         $output->writeln(sprintf('<info>The binary file you specified is %s.</info>', $binaryFile));
         $output->writeln(sprintf('<info>Files %s have been added to the archive.</info>', implode(', ', $files)));
+        $output->writeln(sprintf('<info>Directories %s have been added to the archive.</info>', implode(', ', $directories)));
     }
 
     /**
@@ -143,6 +146,31 @@ class PackCommand extends Command {
         }
 
         return $files;
+    }
+
+    /**
+     * Add source and vendor directories to the archive.
+     *
+     * @return array
+     */
+    protected function addDirectories()
+    {
+        if ($directories = $this->input->getOption('directories'))
+        {
+            return array_map('trim', explode(',', $directories));
+        }
+
+        $sourceDirectories = ['src', 'source'];
+
+        foreach ($sourceDirectories as $source)
+        {
+            if (file_exists(sprintf('%s/%s', getcwd(), $source)))
+            {
+                return [$source, 'vendor'];
+            }
+        }
+
+        return ['vendor'];
     }
 
     /**
