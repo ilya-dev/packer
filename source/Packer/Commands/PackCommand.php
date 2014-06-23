@@ -5,6 +5,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use Symfony\Component\Finder\Finder;
+
 class PackCommand extends Command {
 
     /**
@@ -32,6 +34,7 @@ class PackCommand extends Command {
         $this->setDescription('Starts the builder');
         $this->addOption('destination', 'd', InputOption::VALUE_REQUIRED, 'The desired archive name.', null);
         $this->addOption('source', 's', InputOption::VALUE_REQUIRED, 'Path to the binary file.', null);
+        $this->addOption('files', 'f', InputOption::VALUE_REQUIRED, 'Files you would like to include.', null);
     }
 
     /**
@@ -48,9 +51,11 @@ class PackCommand extends Command {
 
         $archiveName = $this->askForArchiveName();
         $binaryFile = $this->guessBinaryPath($archiveName);
+        $files = $this->addFiles();
 
         $output->writeln(sprintf('<info>The archive name you entered is %s.</info>', $archiveName));
         $output->writeln(sprintf('<info>The binary file you specified is %s.</info>', $binaryFile));
+        $output->writeln(sprintf('<info>Files %s have been added to the archive.</info>', implode(', ', $files)));
     }
 
     /**
@@ -110,6 +115,34 @@ class PackCommand extends Command {
         while (is_null($path));
 
         return $path;
+    }
+
+    /**
+     * Add (license, readme etc.) files to the archive.
+     *
+     * @return array
+     */
+    protected function addFiles()
+    {
+        if ($files = $this->input->getOption('files'))
+        {
+            return array_map('trim', explode(',', $files));
+        }
+
+        $finder = new Finder;
+        $finder->files()->in(getcwd());
+
+        $files = [];
+
+        foreach ($finder as $file)
+        {
+            if (in_array($file->getFilename(), ['license', 'readme.md']))
+            {
+                $files[] = $file->getFilename();
+            }
+        }
+
+        return $files;
     }
 
     /**
