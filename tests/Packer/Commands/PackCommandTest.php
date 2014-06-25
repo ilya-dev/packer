@@ -33,7 +33,11 @@ class PackCommandTest extends \TestCase
 
     /** @test */ function it_adds_important_files_to_the_archive()
     {
-        $this->assertContains('Files license, readme.md have been added to the archive.', $this->tester->getDisplay());
+        // $this->assertContains('Files license, readme.md have been added to the archive.', $this->tester->getDisplay());
+        $output = $this->tester->getDisplay();
+
+        $this->assertContains('readme.md', $output);
+        $this->assertContains('license', $output);
     }
 
     /** @test */ function it_adds_source_and_vendor_directories()
