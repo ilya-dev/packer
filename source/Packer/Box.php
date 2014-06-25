@@ -40,7 +40,7 @@ class Box implements \JsonSerializable {
 
         return [
             'main' => $this->source,
-            'output' => $this->destination,
+            'output' => "{$this->destination}.phar",
             'stub' => true,
             'files' => $this->files,
             'finder' => $directories

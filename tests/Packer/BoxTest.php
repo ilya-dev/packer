@@ -17,4 +17,26 @@ class BoxTest extends \TestCase {
         $this->assertTrue($this->subject instanceof \JsonSerializable);
     }
 
+    /** @test */ function it_converts_the_object_into_proper_JSON()
+    {
+        $output = [
+            'main' => 'binaries/packer',
+            'output' => 'packer.phar',
+            'stub' => true,
+            'files' => ['license', 'readme.md'],
+            'finder' => [
+                [
+                    'name' => '*.php',
+                    'in' => 'source'
+                ],
+                [
+                    'name' => '*.php',
+                    'in' => 'vendor'
+                ]
+            ]
+        ];
+
+        $this->assertEquals($output, $this->subject->jsonSerialize());
+    }
+
 }
