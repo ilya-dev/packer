@@ -12,4 +12,9 @@ class BoxTest extends \TestCase {
         $this->assertInstanceOf('Packer\Box', $this->subject);
     }
 
+    /** @test */ function it_is_json_serializable()
+    {
+        $this->assertTrue($this->subject instanceof \JsonSerializable);
+    }
+
 }
